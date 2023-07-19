@@ -1,11 +1,16 @@
 import React from 'react'
-import { CATEGORIES } from '../data/dummyData'
 import { FlatList } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import { CATEGORIES } from '../data/dummyData'
 import CategoryGridTile from '../components/CategoryGridTile'
 
-const Categories = (props) => {
-  const handleOnPress = () => {
-    props.navigation.navigate('MealOverview')
+const Categories = () => {
+  const navigation = useNavigation();
+
+  const handleOnPress = (item) => {
+    navigation.navigate('MealOverview', {
+      categoryId:item.id
+    })
   }
 
   return  (
@@ -13,7 +18,7 @@ const Categories = (props) => {
     data={CATEGORIES} 
     keyExtractor={(item) => item.id}
     renderItem={({item}) => {
-      return <CategoryGridTile title={item.title} color={item.color} onPress={handleOnPress}/>
+      return <CategoryGridTile title={item.title} color={item.color} onPress={() => handleOnPress(item)}/>
     }}
     numColumns={2}
   />
