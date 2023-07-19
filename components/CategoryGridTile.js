@@ -4,8 +4,8 @@ import React from 'react'
 const CategoryGridTile = ({title, color}) => {
   return (
     <View style={styles.container}>
-        <Pressable style={({pressed}) => [styles.pressable, pressed && Platform.OS === 'ios' ? styles.pressablePressed : {}]} android_ripple={{color: '#ccc'}} >
-            <View style={styles.innerContainer}>
+        <Pressable style={({pressed}) => [styles.pressable, pressed ? styles.pressablePressed : {}]} android_ripple={{color: '#ccc'}} >
+            <View style={[styles.innerContainer, {backgroundColor: color}]}>
                 <Text style={styles.title}>{title} 1</Text>   
             </View>
         </Pressable>
