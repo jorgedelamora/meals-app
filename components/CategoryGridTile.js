@@ -10,7 +10,7 @@ const CategoryGridTile = ({title, color, onPress}) => {
   return (
     <View style={styles.container}>
         <Pressable 
-            style={({pressed}) => [styles.pressable, pressed ? styles.pressablePressed : {}]} 
+            style={({pressed}) => [styles.pressable, pressed ? styles.pressablePressed : null]} 
             android_ripple={{color: '#ccc'}} 
             onPress={handleOnPress}
         >
