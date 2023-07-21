@@ -4,6 +4,7 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { MEALS } from '../data/dummyData'
 import MealDetails from '../components/MealDetails'
 import List from '../components/SingleMealDetails/List'
+import IconButton from '../components/IconButton'
 
 
 const SingleMealDetails = () => {
@@ -12,9 +13,13 @@ const SingleMealDetails = () => {
     const meal = MEALS.find(meal => meal.id === params.id)
 
     useLayoutEffect(() => {
+
+        const handleOnPress = () => console.log('pressed!');
+
         navigation.setOptions({
-            title: meal.title
-        })
+            title: meal.title,
+            headerRight: () => <IconButton onPress={handleOnPress} />
+        });
     },[params, navigation]);
 
     return (
