@@ -3,6 +3,7 @@ import Categories from './screens/Categories';
 import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import MealOverview from './screens/MealOverview';
+import SingleMealDetails from './screens/SingleMealDetails';
 
 export default function App() {
 
@@ -36,6 +37,7 @@ export default function App() {
           //   }
           // }}
         />
+        <Stack.Screen name='singleMealDetails' component={SingleMealDetails}/>
       </Stack.Navigator>
       </NavigationContainer>
     </>

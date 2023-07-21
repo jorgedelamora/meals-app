@@ -9,24 +9,29 @@ const MealOverview = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const {categoryId} = route.params;
-  const categoryTitle = CATEGORIES.find(category => category.id === categoryId).title;
-  navigation.setOptions({
-    title: categoryTitle
-  });
 
   const mealsInThisCategory = MEALS.filter((meal) => {
     return meal.categoryIds.includes(categoryId);
   });
 
   const renderMeal = (itemData) => {
+
     const {item} = itemData;
+
+    const handleOnPress = () => {
+      navigation.navigate('singleMealDetails', {id: item.id,});
+    }
+
     const SingleMealProps = {
       title: item.title,
       uri: item.imageUrl,
       affordability: item.affordability,
       complexity: item.complexity,
-      duration: item.duration
+      duration: item.duration,
+      onPress: handleOnPress
     };
+
+    
 
     return <SingleMeal {...SingleMealProps}/>;
   }
