@@ -13,7 +13,7 @@ const Favorites = () => {
 
   if(!favoriteMeals.length) {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, styles.centered]}>
         <Text style={styles.title}>
           You don't have any Favorites Yet...
         </Text>
@@ -35,6 +35,10 @@ const styles = StyleSheet.create({
     flex:1,
     padding: 16
   },
+  centered: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   title:{
       color: '#e2b497',
       fontSize: 18,
@@ -42,8 +46,6 @@ const styles = StyleSheet.create({
       marginVertical: 4,
       padding: 6,
       textAlign: 'center',
-      borderBottomColor: '#e2b497',
-      borderBottomWidth: 2,
       marginHorizontal: 24
   }
 });
