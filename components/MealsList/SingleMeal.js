@@ -1,6 +1,6 @@
 import { View, Text, Pressable, Image, StyleSheet, Platform } from 'react-native'
 import React from 'react'
-import MealDetails from './MealDetails';
+import MealDetails from '../MealDetails';
 
 const SingleMeal = ({title, uri, duration, affordability, complexity, onPress}) => {
 

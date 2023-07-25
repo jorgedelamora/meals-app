@@ -7,6 +7,7 @@ import SingleMealDetails from './screens/SingleMealDetails';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Favorites from './screens/Favorites';
 import { Ionicons } from '@expo/vector-icons';
+import FavoritesContextProvider from './context/favorites';
 
 export default function App() {
 
@@ -54,20 +55,22 @@ export default function App() {
   return (
     <>
       <StatusBar style='default' />
-      <NavigationContainer>
-      <Stack.Navigator screenOptions={screenOptionsStackNav}>
-        <Stack.Screen 
-          name='categoriesMenu' 
-          component={DrawerNavigator} 
-          options={{headerShown: false}}
-        />
-        <Stack.Screen 
-          name='MealOverview' 
-          component={MealOverview}
-        />
-        <Stack.Screen name='singleMealDetails' component={SingleMealDetails}/>
-      </Stack.Navigator>
-      </NavigationContainer>
+      <FavoritesContextProvider>
+        <NavigationContainer>
+        <Stack.Navigator screenOptions={screenOptionsStackNav}>
+          <Stack.Screen 
+            name='categoriesMenu' 
+            component={DrawerNavigator} 
+            options={{headerShown: false}}
+          />
+          <Stack.Screen 
+            name='MealOverview' 
+            component={MealOverview}
+          />
+          <Stack.Screen name='singleMealDetails' component={SingleMealDetails}/>
+        </Stack.Navigator>
+        </NavigationContainer>
+      </FavoritesContextProvider>
     </>
   );
 }

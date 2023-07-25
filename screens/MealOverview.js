@@ -1,8 +1,8 @@
 import React, { useLayoutEffect } from 'react'
 import { useRoute, useNavigation } from '@react-navigation/native'
-import { View, FlatList, StyleSheet } from 'react-native'
-import SingleMeal from '../components/SingleMeal'
+import { View, StyleSheet } from 'react-native'
 import { MEALS, CATEGORIES } from '../data/dummyData'
+import MealsList from '../components/MealsList/MealsList'
 
 const MealOverview = () => {
 
@@ -13,28 +13,6 @@ const MealOverview = () => {
   const mealsInThisCategory = MEALS.filter((meal) => {
     return meal.categoryIds.includes(categoryId);
   });
-
-  const renderMeal = (itemData) => {
-
-    const {item} = itemData;
-
-    const handleOnPress = () => {
-      navigation.navigate('singleMealDetails', {id: item.id,});
-    }
-
-    const SingleMealProps = {
-      title: item.title,
-      uri: item.imageUrl,
-      affordability: item.affordability,
-      complexity: item.complexity,
-      duration: item.duration,
-      onPress: handleOnPress
-    };
-
-    
-
-    return <SingleMeal {...SingleMealProps}/>;
-  }
 
   useLayoutEffect(() => {
     const setNavigationOptionsDynamically = () => {
@@ -50,7 +28,7 @@ const MealOverview = () => {
 
   return (
     <View style={styles.container}>
-      <FlatList data={mealsInThisCategory} keyExtractor={(item) => item.id} renderItem={renderMeal}/>
+      <MealsList meals={mealsInThisCategory}/>
     </View>
   )
 }

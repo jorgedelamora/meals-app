@@ -1,26 +1,38 @@
-import React, {useLayoutEffect} from 'react'
-import { Text, Image, StyleSheet, ScrollView, View } from 'react-native'
+import React, {useLayoutEffect, useContext} from 'react'
+import { Text, Image, StyleSheet, ScrollView, View, Alert } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { MEALS } from '../data/dummyData'
 import MealDetails from '../components/MealDetails'
 import List from '../components/SingleMealDetails/List'
 import IconButton from '../components/IconButton'
+import { FavoritesContext } from '../context/favorites'
 
 
 const SingleMealDetails = () => {
     const navigation = useNavigation();
     const {params} = useRoute();
+    const favoritesCtx = useContext(FavoritesContext);
     const meal = MEALS.find(meal => meal.id === params.id)
+
+    const isFavorite = favoritesCtx.ids.includes(params.id);
+
+    const handleOnPress = () => {
+        if(isFavorite){
+            favoritesCtx.removeFavorite(params.id);
+            Alert.alert('Removed from My Favorites!', '', [{text: 'Ok'}]);
+        }else{
+            favoritesCtx.addFavorite(params.id);
+            Alert.alert('added to My Favorites!', '', [{text: 'Ok'}]);
+        }
+    };
 
     useLayoutEffect(() => {
 
-        const handleOnPress = () => console.log('pressed!');
-
         navigation.setOptions({
             title: meal.title,
-            headerRight: () => <IconButton onPress={handleOnPress} />
+            headerRight: () => <IconButton onPress={handleOnPress} iconiconsIcon={isFavorite ? 'star' : 'star-outline'}/>
         });
-    },[params, navigation]);
+    },[params, navigation, isFavorite]);
 
     return (
         <ScrollView>
